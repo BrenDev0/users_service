@@ -11,6 +11,5 @@ def row_to_domain(row: UserRow) -> User:
         created_at=row.created_at
     )
 
-
 def domain_create_to_row(domain_create: UserCreate) -> UserRow:
     return UserRow(**asdict(domain_create)) 
