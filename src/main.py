@@ -7,7 +7,7 @@ app = FastAPI()
 def health_check():
     return {"detail":[{"msg": "Users service ok"}]}
 
-app.include_router(router, "")
+app.include_router(router)
 
 
 

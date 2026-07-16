@@ -21,10 +21,7 @@ async def get_by_id(db: AsyncSession, user_id: UUID) -> User | None:
 
     return row_to_domain(row) if row else None
 
-async def delete_by_id(db: AsyncSession, user_id: UUID) -> User | None:
+async def delete_by_id(db: AsyncSession, user_id: UUID) -> None:
     stmt = delete(UserRow).where(UserRow.id == user_id).returning(UserRow)
 
-    result = await db.execute(stmt)
-
-    row = result.scalar_one_or_none()
-    return row_to_domain(row) if row else None
+    await db.execute(stmt)
