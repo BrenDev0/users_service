@@ -2,7 +2,6 @@ import logging
 from uuid import UUID
 from fastapi import Request, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
-from .dependencies import get_db_session
 from .repository import create, get_by_id, delete_by_id
 from ..types import CreateUserFn, GetUserByIdFn, DeleteUserByIdFn
 from ..models import UserCreate, User
