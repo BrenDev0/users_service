@@ -11,5 +11,5 @@ class EncryptionService:
         return self._fernet.encrypt(str(data).encode('utf-8')).decode('utf-8')
     
     def decrypt(self, encrypted: str) -> str:
-        return self._fernet.decrypt(self.encrypted.encode('utf-8')).decode('utf-8')
+        return self._fernet.decrypt(encrypted.encode('utf-8')).decode('utf-8')
 
