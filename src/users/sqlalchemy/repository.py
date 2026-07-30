@@ -21,7 +21,16 @@ async def get_by_id(db: AsyncSession, user_id: UUID) -> User | None:
 
     return row_to_domain(row) if row else None
 
-async def delete_by_id(db: AsyncSession, user_id: UUID) -> None:
-    stmt = delete(UserRow).where(UserRow.id == user_id).returning(UserRow)
+async def get_by_email_hash(db: AsyncSession, email_hash: str) -> User | None:
+    stmt = select(UserRow).where(UserRow.email_hash == email_hash)
 
-    await db.execute(stmt)
+    result = await db.execute(stmt)
+    row = result.scalar_one_or_none()
+
+    return row_to_domain(row) if row else None
+
+async def delete_by_id(db: AsyncSession, user_id: UUID) -> bool:
+    stmt = delete(UserRow).where(UserRow.id == user_id).returning(UserRow.id)
+
+    result = await db.execute(stmt)
+    return result.scalar_one_or_none() is not None

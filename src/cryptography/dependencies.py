@@ -3,7 +3,7 @@ from .types import EncryptionService, HashingService
 
 
 def get_encryption_service(request: Request) -> EncryptionService:
-    service = getattr(request.app.state, "ecryption_service", None)
+    service = getattr(request.app.state, "encryption_service", None)
 
     if not service:
         raise ValueError("No encryption service initialized in app")

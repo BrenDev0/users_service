@@ -1,6 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from uuid import UUID
 from datetime import datetime
+
+
+class ApiSchema(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
 
 
 class UserCreateRequest(BaseModel):
